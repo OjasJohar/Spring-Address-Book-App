@@ -13,8 +13,8 @@ public class ContactData {
         counter++;
     }
 
-    public ContactData(String name,String address){
-        this();
+    public ContactData(long id,String name,String address){
+        this.id=id;
         setName(name);
         setAddress(address);
     }
