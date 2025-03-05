@@ -1,10 +1,10 @@
 package com.bridgelabz.AddressBookApp.controller;
 
 /*
-   Use Case : 4
+   Use Case : 5
    This is Rest Controller file to ensure that data is transmitted in REST calls.
-   Note that Controller in UC4 was calling services layer to manage the Model.
-   Service Layer: creating the Model and returning the Model on the REST Calls(Controller).
+   Ability for the Services Layer to store the Employee Payroll Data
+   In this use case the Services Layer will store this Data in a Memory as a List.
    Database is not used.
 */
 
@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/addressbookservice")
 public class AddressBookRestController {
@@ -24,15 +26,15 @@ public class AddressBookRestController {
     AddressService addressService;
 
     @GetMapping("")
-    public ResponseEntity<String> getAllAddresses() {
-        String message = addressService.getAllAddress();
-        return new ResponseEntity<>(message, HttpStatus.OK);
+    public ResponseEntity<List<ContactData>> getAllAddresses() {
+        List<ContactData> contactDataList = addressService.getAllAddress();
+        return new ResponseEntity<>(contactDataList, HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<String> getAddressById(@PathVariable("id") long id) {
-        String message = addressService.getAddressByID(id);
-        return new ResponseEntity<>(message, HttpStatus.OK);
+    public ResponseEntity<ContactData> getAddressById(@PathVariable("id") long id) {
+        ContactData contactData = addressService.getAddressByID(id);
+        return new ResponseEntity<>(contactData, HttpStatus.OK);
     }
 
     @PostMapping("/create")
