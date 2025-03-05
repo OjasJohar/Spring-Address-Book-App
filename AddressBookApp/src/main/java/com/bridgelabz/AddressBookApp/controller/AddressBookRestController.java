@@ -1,14 +1,15 @@
 package com.bridgelabz.AddressBookApp.controller;
 
 /*
-  Use Case : 2
-  - Create a Rest Controller to demonstrate the various HTTP Methods
-  - In application.properties, set properties of MySQL Driver and MySQL Credentials
-  - Use ResponseEntity to return JSON Response
-  - At this stage the interest is to establish the connectivity and ensure
-    data is transmitted in REST Calls
-*/
+   Use Case : 3
+   This is Rest Controller file to ensure that data is transmitted in REST calls
+   Note that Controller in UC3 was creating the Model and returning the Model on the REST Calls.
+   Database is not used.
+   Service layer is not used
+ */
 
+import com.bridgelabz.AddressBookApp.dto.ContactDTO;
+import com.bridgelabz.AddressBookApp.model.ContactData;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,19 +31,26 @@ public class AddressBookRestController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> creatingUser() {
-        String message = "POST: creating a new user";
-        return new ResponseEntity<>(message, HttpStatus.OK);
+    public ResponseEntity<ContactData> creatingUser(@RequestBody ContactDTO contactDTO) {
+        ContactData contactData=new ContactData();
+        String name=contactDTO.getName();
+        String address=contactDTO.getAddress();
+
+        contactData.setName(name);
+        contactData.setAddress(address);
+//        String message = "POST: creating a new user";
+        return new ResponseEntity<>(contactData, HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updatingUserDetails(@PathVariable("id") long id) {
-        String message = "PUT: updating a user details of id "+ id;
+    public ResponseEntity<String> updatingUserDetails(@PathVariable long id,@RequestBody ContactDTO contactDTO) {
+
+        String message = "PUT: updating a user details";
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<String> deletingUser() {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deletingUser(@PathVariable long id) {
         String message = "DELETE: deleting a user";
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
