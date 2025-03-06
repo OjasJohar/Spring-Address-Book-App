@@ -1,14 +1,17 @@
 package com.bridgelabz.AddressBookApp.controller;
 
 /*
-   Use Case : 9
-   Database setting as Environment Variable
-   Open the MySQL Client and run the script to set up DB, User and Privileges.
+   Use Case : 10
+   Adding Validation to Name Field(ContactDTO) so the REST call can be validated
+   - To begin with make it a required field i.e. a not empty field (@NotBlank)
+   - Then add pattern to it. (@Pattern)
+   - The Validation needs to be done for both Create and Update REST Calls. (using @Valid on @RequestBody)
 */
 
 import com.bridgelabz.AddressBookApp.dto.ContactDTO;
 import com.bridgelabz.AddressBookApp.model.ContactData;
 import com.bridgelabz.AddressBookApp.service.AddressService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,13 +39,13 @@ public class AddressBookRestController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ContactData> creatingUser(@RequestBody ContactDTO contactDTO) {
+    public ResponseEntity<ContactData> creatingUser(@Valid @RequestBody ContactDTO contactDTO) {
         ContactData contactData=addressService.creatingUser(contactDTO);
         return new ResponseEntity<>(contactData, HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ContactData> updatingUserDetails(@PathVariable long id,@RequestBody ContactDTO contactDTO) {
+    public ResponseEntity<ContactData> updatingUserDetails(@Valid @PathVariable long id,@RequestBody ContactDTO contactDTO) {
         ContactData contactData=addressService.updatingUserData(id,contactDTO);
         return new ResponseEntity<>(contactData, HttpStatus.OK);
     }
