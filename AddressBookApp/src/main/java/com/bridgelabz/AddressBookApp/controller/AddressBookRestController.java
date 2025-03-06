@@ -1,10 +1,8 @@
 package com.bridgelabz.AddressBookApp.controller;
 
 /*
-   Use Case : 5
-   This is Rest Controller file to ensure that data is transmitted in REST calls.
-   Ability for the Services Layer to store the Employee Payroll Data
-   In this use case the Services Layer will store this Data in a Memory as a List.
+   Use Case : 6
+   ADD Lombok Library to auto generate getters and setters for the DTO.
    Database is not used.
 */
 

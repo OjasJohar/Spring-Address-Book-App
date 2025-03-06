@@ -1,5 +1,8 @@
 package com.bridgelabz.AddressBookApp.model;
 
+import lombok.Data;
+
+@Data
 public class ContactData {
 
     private static long counter=1;
@@ -17,29 +20,5 @@ public class ContactData {
         this.id=id;
         setName(name);
         setAddress(address);
-    }
-
-    public long getId(){
-        return id;
-    }
-
-    public void setName(String name){
-        this.name=name;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public void setAddress(String address){
-        this.address=address;
-    }
-
-    public String getAddress(){
-        return address;
-    }
-
-    public String getDetails(){
-        return "ID = " + id + ", Name = " + name + ", Address = " + address;
     }
 }
